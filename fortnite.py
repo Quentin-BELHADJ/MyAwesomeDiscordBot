@@ -33,6 +33,8 @@ def calcul(niveau, niveau_voulu, journalier, hebdo, lego):
     end_date = datetime.datetime.strptime(string_date, '%Y-%m-%dT%H:%M:%S')  #converting api string to date time
     temps =  end_date - datetime.datetime.now() + datetime.timedelta(hours=2) # Time left in days, hours, minutes, seconds 
     jour_total = temps.days  # Total days left
+    if jour_total < 0:
+        return "Il n'y a pas encore de date pour la saison actuelle"
     print(temps.days)
     hours, remainder = divmod(temps.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
@@ -87,6 +89,7 @@ def calcul(niveau, niveau_voulu, journalier, hebdo, lego):
             return (f"Tu finiras {days_ahead} jours en avance")
 
 if __name__ == "__main__":
+    print(calcul)
     print(calcul(0, 0, True, True, False))
     print(calcul(16, 70, True, True, False))
     print(calcul(0, 70, False, False, True))
